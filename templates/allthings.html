@@ -23,12 +23,12 @@
 	{% for thing in allgoodthingslist %}
 		{% if thing.done %}
 		<li class="done">
-		<p><a href="/done/off/{{thing.pk}}"><img class="check" src="/static/checkon.png"></a>
+		<p><a href="done/off/{{thing.pk}}"><img class="check" src="/static/checkon.png"></a>
 		{% else %}
 		<li>
-		<p><a href="/done/on/{{thing.pk}}"><img class="check" src="/static/checkoff.png"></a>
+		<p><a href="done/on/{{thing.pk}}"><img class="check" src="/static/checkoff.png"></a>
 		{% endif %}
-		{{ thing.content }}</p><p class="date">{{ thing.date|date:"P N j" }}</p><p class="date"><a href="">Delete</a></p></li>
+		{{ thing.content }}</p><p class="date">{{ thing.date|date:"P N j" }}</p><p class="date"><a href="delete/{{thing.pk}}">Delete</a></p></li>
 	{% endfor %}
 	</ul>
 	</div>

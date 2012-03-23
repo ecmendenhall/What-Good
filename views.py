@@ -74,8 +74,22 @@ def todaysgood(request):
 	
 	return render_to_response('todaysgood2.html', {'username': username, 'birthdate': birthdate, 'age': age, 'dayslived': dayslived, 'roundedyearsleft': roundedyearsleft, 'daysleft': daysleft, 'deathdate': deathdate, 'lifecompletedpercent': lifecompletedpercent, 'lifecompletedpixels': lifecompletedpixels, 'newgoodthingform': newgoodthingform, 'goodthingslist': goodthingslist}, context_instance=RequestContext(request))
 
+def delete_today(request, pk):
+	"""Delete a goodthing"""
+	goodthing = GoodThing.objects.get(pk=pk)
+	goodthing.delete()
+	
+	return HttpResponseRedirect('/todaysgood/')
 
-def done(request, action, pk):
+def delete_all(request, pk):
+	"""Delete a goodthing"""
+	goodthing = GoodThing.objects.get(pk=pk)
+	goodthing.delete()
+	
+	return HttpResponseRedirect('/allthings/')
+
+
+def done_today(request, action, pk):
 	"""Toggle a goodthing's 'Done' status on or off"""
 	goodthing = GoodThing.objects.get(pk=pk)
 	
@@ -85,8 +99,21 @@ def done(request, action, pk):
 		goodthing.done = False
 	
 	goodthing.save()
-	nexturl = request.session['last_visited']
-	return HttpResponseRedirect(nexturl)
+	
+	return HttpResponseRedirect('/todaysgood/')
+	
+def done_all(request, action, pk):
+	"""Toggle a goodthing's 'Done' status on or off"""
+	goodthing = GoodThing.objects.get(pk=pk)
+	
+	if action == "on":
+		goodthing.done = True
+	elif action == "off":
+		goodthing.done = False
+	
+	goodthing.save()
+		
+	return HttpResponseRedirect("/allthings/")
 
 def about(request):
 	"""Display the about page."""

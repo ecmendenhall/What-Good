@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib.auth.views import login, logout
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from whatgood.views import todaysgood, done, about, landing_page, show_allthethings
+from whatgood.views import todaysgood, done_today, done_all, about, landing_page, delete_today, delete_all, show_allthethings
 from whatgood.forms import UserProfileForm
 from goodthings.models import GoodThing
 import profiles
@@ -21,7 +21,10 @@ urlpatterns = patterns('',
 	(r'^accounts/', include('registration.urls')),
 	('^profiles/edit', 'profiles.views.edit_profile', {'form_class': UserProfileForm,}),
 	(r'^profiles/', include('profiles.urls'),),
-	(r'^done/(on|off)/(\d*)/$', done),
+	(r'^todaysgood/done/(on|off)/(\d*)/$', done_today),
+	(r'^allthings/done/(on|off)/(\d*)/$', done_all),
+	(r'^todaysgood/delete/(\d*)/$', delete_today),
+	(r'^allthings/delete/(\d*)/$', delete_all),
 	
 	
     # Examples:

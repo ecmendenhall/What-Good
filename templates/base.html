@@ -72,7 +72,10 @@
 		<div class="container">
 			<a class="brand" href="/">What.gd</a>
 			<ul class ="nav">
-				<li class ="active"><a href="/todaysgood/">Home</a></li>
+				<li><a href="/todaysgood/">Home</a></li>
+				{% if user.is_authenticated %}
+				<li><a href="/profiles/{{ username }}">Profile</a></li>
+				{% endif %}
 				<li><a href="/about/">About</a></li>
 				
 			    
