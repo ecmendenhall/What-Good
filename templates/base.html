@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>{% block title %}What.gd{% endblock %}</title>
+
+<link rel="stylesheet" href="/static/bootstrap.css">
+<link rel="stylesheet" href="/static/customcolor.css">
+<link rel="stylesheet" href="/static/liststyles.css">
+    
+	
+	<style type="text/css">
+      /* Override some defaults */
+      html, body {
+        background-color: #404040;
+      }
+      body {
+        padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
+      }
+      .container > footer p {
+        text-align: center; /* center align it with the container */
+      }
+      .container {
+        width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
+      }
+
+      /* The white background content wrapper */
+      .content {
+        background-color: #eeeeee;
+        padding: 20px;
+        margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+        -webkit-border-radius: 0 0 6px 6px;
+           -moz-border-radius: 0 0 6px 6px;
+                border-radius: 0 0 6px 6px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                box-shadow: 0 1px 2px rgba(0,0,0,.15);
+      }
+
+      /* Page header tweaks */
+      .page-header {
+        background-color: #303030;
+        padding: 20px 20px 10px;
+        margin: -20px -20px 20px;
+      }
+      
+      .page-header > h1 { color: #a0a0a0; }
+
+      /* Give a quick and non-cross-browser friendly divider */
+      .content .span4 {
+        margin-left: 0;
+        padding-left: 19px;
+        border-left: 1px solid #eee;
+      }
+
+      .topbar .btn {
+        border: 0;
+      }
+      
+      footer { color: #a0a0a0;
+  border-top: none;
+}
+
+
+    </style>
+	
+</head>
+
+<body>
+
+<div class ="topbar">
+	<div class="fill">
+		<div class="container">
+			<a class="brand" href="/">What.gd</a>
+			<ul class ="nav">
+				<li class ="active"><a href="/todaysgood/">Home</a></li>
+				<li><a href="/about/">About</a></li>
+				
+			    
+			</ul>
+			{% if user.is_authenticated %}
+				<div class="pull-right">
+			    <ul class="nav">
+			    <li><a href="/accounts/logout/">Sign out</a></li>
+			    </ul>
+			    </div>
+			{% else %} 
+			<form method="post" action="{% url django.contrib.auth.views.login %}" class="pull-right">{% csrf_token %}
+				<input class="input-small" type="text" name="username" id="id_username" placeholder="Username">
+            	<input class="input-small" name="password" type="password" id="id_password" placeholder="Password">
+            	<input type="hidden" name="next" value="{{ next }}" />
+          		<button class="btn" type="submit">Sign in</button>
+          </form>
+           	{% endif %}
+        </div>
+      </div>
+    </div>
+
+<div class="container">
+	<div class="content">
+        
+        {% block content %}{% endblock %}
+        {% block userinfo %}{% endblock %}
+        {% block goodthings %}{% endblock %}
+        
+    </div>
+    
+    <footer>
+    	<p>A totally non-commercial thing by E.C. Mendenhall</p>
+    </footer>
+    </div> <!-- /container -->
+    
+</body>
+</html>

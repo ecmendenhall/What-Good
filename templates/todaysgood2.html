@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block userinfo %}
+
+
+
+<div class="page-header">
+<h1>Hello, <strong class="variable"><a href="/profiles/{{ username }}" class="variable">{{ username }}!</strong></a></h1> 
+</div>
+
+<div class="row">
+	<div class="span7">
+
+<div class="paddedcontainer">
+You were born on <strong class="variable">{{ birthdate }}.</strong> You are <strong class="variable">{{ age }}</strong> years old. You have lived <strong class="variable">{{ dayslived }}</strong> days. You have <strong class="variable">{{ daysleft }}</strong> days, or about <strong class="variable">{{ roundedyearsleft }}</strong> years left. You are expected to die around <strong class="variable">{{ deathdate }}.</strong>
+</div>
+<div class="paddedcontainer" id="metercontainer">
+<div class="meter">
+		<span style="width: {{ lifecompletedpercent }}%"></span>	
+	<p class="metercaption">You have completed <strong class="variable">{{ lifecompletedpercent }}%</strong> of your life.</p>
+</div>
+</div>
+{% endblock %}
+
+{% block goodthings %}
+    
+<div class="paddedcontainer" id="nolabels">
+<h2>What good will you do today?</h2>
+<div class="input">
+<form class="textfieldeffect" action='' method="post">{% csrf_token %}
+{{ newgoodthingform.non_field_errors }}
+{{ newgoodthingform.content.errors}}
+{{ newgoodthingform }}
+
+</div>
+<input type="submit" value="Submit" class="btn large">
+</form>
+</div>
+
+</div>
+
+<div class="span7">
+<h2> What good have you done today? </h2>
+{% if goodthingslist %}
+<div class="goodthingcontainer">
+<ul class="goodthinglist">
+	{% for thing in goodthingslist %}
+		{% if thing.done %}
+		<li class="done">
+		<p><a href="/done/off/{{thing.pk}}"><img class="check" src="/static/checkon.png"></a>
+		{% else %}
+		<li>
+		<p><a href="/done/on/{{thing.pk}}"><img class="check" src="/static/checkoff.png"></a>
+		{% endif %}
+		{{ thing.content }}</p><p class="date">{{ thing.date|date:"P N j" }}</p><p class="date"><a href="">Delete</a></p></li>
+	{% endfor %}
+</ul>
+</div>
+{% else %}
+<p>You haven't done any good yet today.</p>
+{% endif %}
+<p class="pull-right"><a href="/allthings/">View all</a></p>
+</div>
+</div>
+{% endblock %}
+

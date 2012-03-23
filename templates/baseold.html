@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/static/whatgood.css" />
+    <title>{% block title %}What.gd{% endblock %}</title>
+    
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+    <script>
+		$(function() {
+			$(".meter > span").each(function() {
+				$(this)
+					.data("origWidth", $(this).width())
+					.width(0)
+					.animate({
+						width: $(this).data("origWidth")
+					}, 1200);
+			});
+		});
+	</script>
+		
+</head>
+
+<body>
+        <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+    <div id="userinfo">
+    {% block userinfo %}{% endblock %}
+    </div>
+    <div id="newgoodthing">
+        {% block newgoodthing %}{% endblock %}
+    </div>
+</body>
+</html>

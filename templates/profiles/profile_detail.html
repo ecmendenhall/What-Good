@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Create Profile{% endblock %}
+ 
+{% block content %}
+<div class="row">
+	<div class="span7">
+<h1>{{ user }}'s profile: </h1>
+
+<p><h3>Birthdate:</h3>{{ profile.birthdate }}</p>
+<p><h3>Sex:</h3>
+{{ profile.sex }}
+</p>
+<p><h3>Email:</h3>{{ user.email }}</p>
+
+<form method="LINK" action="/profiles/edit/">
+      <input type="submit" value="Edit Profile" id="submit" class="btn">
+</form>
+</div>
+</div>
+{% endblock content %}

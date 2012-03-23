@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Edit Profile{% endblock %}
+ 
+{% block content %}
+<h1>Edit profile for {{ user }} </h1>
+ 
+<form method="POST" action="" class="form-stacked">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" name="submit" value="Update" id="submit" class="btn">
+</form>
+ 
+{% endblock content %}

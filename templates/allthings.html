@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block userinfo %}
+
+<div class="page-header">
+<h1>Hello, <strong class="variable"><a href="/profiles/{{ username }}" class="variable">{{ username }}!</strong></a></h1> 
+</div>
+
+<div class="row">
+	<div class="span7">
+
+		<div class="paddedcontainer">
+		<h2>You have done <strong class="variable">{{ number_of_things }}</strong> things.</h2>
+		</div>
+		{% endblock %}
+	</div>
+
+{% block goodthings %}
+<div class="span7">
+{% if allgoodthingslist %}
+	<div class="goodthingcontainer">
+	<ul class="goodthinglist">
+	{% for thing in allgoodthingslist %}
+		{% if thing.done %}
+		<li class="done">
+		<p><a href="/done/off/{{thing.pk}}"><img class="check" src="/static/checkon.png"></a>
+		{% else %}
+		<li>
+		<p><a href="/done/on/{{thing.pk}}"><img class="check" src="/static/checkoff.png"></a>
+		{% endif %}
+		{{ thing.content }}</p><p class="date">{{ thing.date|date:"P N j" }}</p><p class="date"><a href="">Delete</a></p></li>
+	{% endfor %}
+	</ul>
+	</div>
+{% else %}
+<p>You haven't done any good yet.</p>
+{% endif %}
+</div>
+</div>
+{% endblock %}
+
