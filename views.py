@@ -70,7 +70,7 @@ def todaysgood(request):
 	lifecompletedpercent = 100 * round(lifecompleted, 3)
 	lifecompletedpixels = round(lifecompleted * 400)	
 	
-	goodthingslist = GoodThing.objects.filter(author__exact=username).filter(date__day=today.day).order_by('-date')[:6]
+	goodthingslist = GoodThing.objects.filter(author__exact=username).filter(date__day=today.day).filter(date__month=today.month).filter(date__year=today.year).order_by('-date')[:6]
 	
 	return render_to_response('todaysgood2.html', {'username': username, 'birthdate': birthdate, 'age': age, 'dayslived': dayslived, 'roundedyearsleft': roundedyearsleft, 'daysleft': daysleft, 'deathdate': deathdate, 'lifecompletedpercent': lifecompletedpercent, 'lifecompletedpixels': lifecompletedpixels, 'newgoodthingform': newgoodthingform, 'goodthingslist': goodthingslist}, context_instance=RequestContext(request))
 

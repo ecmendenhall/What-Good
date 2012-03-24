@@ -80,9 +80,11 @@
 		<div class="container">
 			<a class="brand" href="/">What.gd</a>
 			<ul class ="nav">
-				<li><a href="/todaysgood/">Home</a></li>
 				{% if user.is_authenticated %}
+				<li><a href="/todaysgood/">Home</a></li>
 				<li><a href="/profiles/{{ username }}">Profile</a></li>
+				{% else %}
+				<li><a href="/todaysgood/">Login</a></li>
 				{% endif %}
 				<li><a href="/about/">About</a></li>
 				
@@ -94,13 +96,6 @@
 			    <li><a href="/accounts/logout/">Sign out</a></li>
 			    </ul>
 			    </div>
-			{% else %} 
-			<form method="post" action="{% url django.contrib.auth.views.login %}" class="pull-right">{% csrf_token %}
-				<input class="input-small" type="text" name="username" id="id_username" placeholder="Username">
-            	<input class="input-small" name="password" type="password" id="id_password" placeholder="Password">
-            	<input type="hidden" name="next" value="{{ next }}" />
-          		<button class="btn" type="submit">Sign in</button>
-          </form>
            	{% endif %}
         </div>
       </div>
@@ -118,7 +113,7 @@
     <footer>
     	<p>A totally non-commercial thing by E.C. Mendenhall</p>
     </footer>
-    </div> <!-- /container -->
+    </div> 
     
 </body>
 </html>
