@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     'registration',
     'profiles',
     'csvimport',
+    'django_extensions',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -160,6 +161,8 @@ LOGGING = {
         },
     }
 }
+
+ENCRYPTED_FIELD_KEYS_DIR = '/Users/connormendenhall/Django/whatgood/keyczar/keys/'
 
 # Dummy email settings for development testing below.
 # Run 'python -m smtpd -n -c DebuggingServer localhost:1025' in the console to set up a temporary SMTP server.

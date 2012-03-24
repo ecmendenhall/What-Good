@@ -3,8 +3,7 @@ from django.contrib.auth.models import User
 from django.forms import ModelForm
 from django.forms.widgets import Textarea, HiddenInput
 from datetime import datetime
-
-
+from django_extensions.db.fields.encrypted import EncryptedCharField
 
 
 # A class to extend Django's User model with additional information
@@ -21,13 +20,16 @@ class UserProfile(models.Model):
 	
 # A class representing a 'good thing' entered by a user.
 class GoodThing(models.Model):
-	content = models.CharField(max_length=250)
+	content = EncryptedCharField(max_length=250)
 	done = models.BooleanField(default=False)
 	date = models.DateTimeField('date submitted')
 	author = models.ForeignKey(User)
 	
 	class Meta:
 		ordering = ['-date']
+	
+	class Admin:
+		list_display = ('done', 'date', 'author')
  
 	def save(self):
 		if not self.id:
@@ -44,7 +46,9 @@ class GoodThing(models.Model):
 	dothing.allow_tags = True
 	
 	def __unicode__(self):
-		return unicode(self.content)
+		return unicode('Post by %s on %s' % (self.author, self.date))
+	
+	
 
 # A class to contain the life expectancy table data
 class LifeExpectancy(models.Model):
